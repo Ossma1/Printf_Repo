@@ -1,5 +1,6 @@
 #include "main.h"
 #include <stdarg.h>
+#include <stdio.h>
 
 /**
  * _putchar - writes the character c to stdout
@@ -24,11 +25,11 @@ int _printf(const char *format, ...)
 	{
 		if (*format == '%')
 		{
-			*format++;
+			format++;
 			if (*format == 'c')
 			{
 				char c = (char)va_arg(st, int);
-				_putchar(c);
+				putchar(c);
 				count++;
 			}
 			if (*format == 's')
@@ -36,20 +37,20 @@ int _printf(const char *format, ...)
 				char *str = va_arg(st, char *);
 				while (*str != '\0')
 				{
-					_putchar(*str);
+					putchar(*str);
 					str++;
 					count++;
 				}
 			}
 			if (*format == '%')
 			{
-				_putchar('%');
+				putchar('%');
 				count++;
 			}
 		}
 		else
 		{
-			_putchar(*format);
+			putchar(*format);
 			count++;
 		}
 		format++;
