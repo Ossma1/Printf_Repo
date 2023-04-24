@@ -3,24 +3,25 @@
 #include <stdio.h>
 
 /**
- * _putchar - writes the character c to stdout
- * in this function we gonna handle the option %c
- *
- * Return: the number of characters printed (excluding the null byte used to end output to strings)
+ * _printf: handle %c and the s and the %
+ * @format: variadic parametr
+ * Return: the number of characters printed
+ * excluding the null byte used to end output to strings
  * On error, -1 is returned, and errno is set appropriately.
  */
 
 int _printf(const char *format, ...)
 {
+
 	int count = 0;
 	va_list st;
-	
+
 	va_start(st, format);
+
 	if (!format)
 	{
 		return (-1);
 	}
-	
 	while (*format != '\0')
 	{
 		if (*format == '%')
@@ -29,28 +30,30 @@ int _printf(const char *format, ...)
 			if (*format == 'c')
 			{
 				char c = (char)va_arg(st, int);
-				putchar(c);
+				_putchar(c);
 				count++;
 			}
+
 			if (*format == 's')
 			{
 				char *str = va_arg(st, char *);
 				while (*str != '\0')
 				{
-					putchar(*str);
+					_putchar(*str);
 					str++;
 					count++;
 				}
 			}
+
 			if (*format == '%')
 			{
-				putchar('%');
+				_putchar('%');
 				count++;
 			}
 		}
 		else
 		{
-			putchar(*format);
+			_putchar(*format);
 			count++;
 		}
 		format++;
