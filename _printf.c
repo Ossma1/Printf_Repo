@@ -47,6 +47,13 @@ int _printf(const char *format, ...)
 				putchar('%');
 				count++;
 			}
+			else{
+			    putchar('%');
+			    count++;
+			    putchar(*format);
+			    count++;
+			    
+			}
 		}
 		else
 		{
