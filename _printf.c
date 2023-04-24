@@ -3,6 +3,7 @@
 #include <stdio.h>
 
 /**
+ *
  * _printf: handle %c and the s and the %
  * @format: variadic parametr
  * Return: the number of characters printed
@@ -13,18 +14,17 @@
 int _printf(const char *format, ...)
 {
 
-
 	int count = 0;
 	va_list st;
+	
 
 	va_start(st, format);
 
-	if (!format)
+	if (!format || (*format == '%' && *(format + 1) == '\0'))
 	{
 		return (-1);
 	}
-	else
-	{
+
 	while (*format != '\0')
 	{
 		if (*format == '%')
@@ -34,6 +34,7 @@ int _printf(const char *format, ...)
 			{
 				char c = (char)va_arg(st, int);
 				putchar(c);
+				
 				count++;
 			}
 
@@ -43,6 +44,7 @@ int _printf(const char *format, ...)
 				while (*str != '\0')
 				{
 					putchar(*str);
+					
 					str++;
 					count++;
 				}
@@ -51,15 +53,18 @@ int _printf(const char *format, ...)
 			if (*format == '%')
 			{
 				putchar('%');
+			
 				count++;
 			}
 		}
-
-
-	}
+		else
+		{
+			putchar(*format);
+			
+			count++;
+		}
+		format++;
 	}
 	va_end(st);
 	return (count);
-=======
-   
 }
